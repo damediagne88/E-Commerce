@@ -164,7 +164,7 @@ h1, h2, h3, h4, h5, h6 {
             <a class="text-muted" href="#">Subscribe</a>
           </div>
           <div class="col-4 text-center">
-            <a class="blog-header-logo text-dark" href="{{ route('products.index')}}"">Home</a>
+            <a class="blog-header-logo text-dark" href="{{ route('products.index')}}">Home</a>
           </div>
           <div class="col-4 d-flex justify-content-end align-items-center">
             <a class="text-muted" href="#">
@@ -201,8 +201,8 @@ h1, h2, h3, h4, h5, h6 {
       </div>
 
       <div class="row mb-2">
-        @foreach($products as $product)
-        <div class="col-md-6">
+    
+        <div class="col-md-12">
           <div class="card flex-md-row mb-4 box-shadow h-md-250">
             <div class="card-body d-flex flex-column align-items-start">
               <strong class="d-inline-block mb-2 text-primary">World</strong>
@@ -210,14 +210,14 @@ h1, h2, h3, h4, h5, h6 {
                 <a class="text-dark" href="#">{{$product->title}}</a>
               </h6>
               <div class="mb-1 text-muted">{{ $product->created_at }}</div>
-              <p class="card-text mb-auto">{{ $product->subtitle}}</p>
+              <p class="card-text mb-auto">{{ $product->description}}</p>
               <strong class="card-text mb-auto">{{ $product->getPrice()}} </strong>
-              <a href="{{ route('products.show',$product->slug)}}" class="btn btn-primary">Voir l'article</a>
+              <!--<a href="{{ route('products.show',$product->slug)}}" class="btn btn-primary">Voir l'article</a> -->
             </div>
             <img src="{{$product->image}}">
           </div>
         </div>
-       @endforeach
+     
     </div>
 
    
