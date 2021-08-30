@@ -1,5 +1,7 @@
 <?php
 
+use Gloudemans\Shoppingcart\Facades\Cart;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -25,3 +27,9 @@ Route::resource('products', ProductController::class);
 */
 
 Route::resource('carts',CartController::class);
+
+
+Route::get('/videpanier',function(){
+
+    return Cart::destroy();
+});

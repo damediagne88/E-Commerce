@@ -15,7 +15,8 @@ class CartController extends Controller
      */
     public function index()
     {
-        //
+
+        return view('carts.index');
     }
 
     /**
@@ -35,11 +36,24 @@ class CartController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
-        // Recuperations des informations pour le mettre dans mon panier
-        Cart::add($request->id,$request->title, 1, $request->price)->associate('Product');
+    {   
+       // verifier si le produit a déja été rajouter dans le panier 
+        $duplicata = Cart::search(function ($cartItem, $rowId) use($request) {
+            return $cartItem->id == $request->product_id;
+        });
+        // si l'id existe dans le panier alors je retourne un message flas()
+        if($duplicata->isNotEmpty()){
+        return redirect()->route('products.index')->with('success','Le produit à déja  été rajouter a votre panier');
+        } 
+          
+         // au cas contraire je recupere id du produit
+        $product = Product::find($request->product_id);
+         // Recuperations des informations pour le mettre dans mon panier
+         Cart::add($product->id,$product->title, 1, $product->price)->associate('App\Product');
 
         return redirect()->route('products.index')->with('success','Le produit à bien été ajouter a votre panier');
+        
+         
 
     }
 
@@ -83,8 +97,10 @@ class CartController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($rowId)
     {
-        //
+        Cart::remove($rowId);
+
+        return back()->with('success','le produit a bien été supprimer.');
     }
 }
