@@ -8,6 +8,7 @@
     <link rel="icon" href="/docs/4.0/assets/img/favicons/favicon.ico">
 
     <title>E-commerce</title>
+    @laravelPWA
 
     <link rel="canonical" href="https://getbootstrap.com/docs/4.0/examples/blog/">
 
@@ -25,6 +26,13 @@
 
       /* stylelint-disable selector-list-comma-newline-after */
 
+
+body {
+  background: #eecda3;
+  background: -webkit-linear-gradient(to right, #eecda3, #ef629f);
+  background: linear-gradient(to right, #eecda3, #ef629f);
+  min-height: 100vh;
+}
 .blog-header {
   line-height: 1;
   border-bottom: 1px solid #e5e5e5;
