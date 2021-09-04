@@ -9,10 +9,7 @@ use Gloudemans\Shoppingcart\Facades\Cart;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
+Route::resource('/', ProductController::class);
 /*
 |--------------------------------------------------------------------------
 | Roote Products
@@ -33,3 +30,11 @@ Route::get('/videpanier',function(){
 
     return Cart::destroy();
 });
+
+/*
+|--------------------------------------------------------------------------
+| Roote checkout 
+|--------------------------------------------------------------------------
+*/
+
+Route::get('/paiement','CheckoutController@index')->name('checkout.index');

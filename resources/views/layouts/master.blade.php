@@ -10,6 +10,8 @@
     <title>E-commerce</title>
     @laravelPWA
 
+    @yield('extra_script')
+
     <link rel="canonical" href="https://getbootstrap.com/docs/4.0/examples/blog/">
 
     <!-- Bootstrap core CSS -->
@@ -244,5 +246,7 @@ h1, h2, h3, h4, h5, h6 {
         text: 'Thumbnail'
       });
     </script>
+
+    @yield('extra_footer')
   </body>
 </html>
