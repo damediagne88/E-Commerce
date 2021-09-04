@@ -3,7 +3,9 @@
 @section('content')
 
 <div class="col-md-12">
-<h4> Votre commande à bien été prise en compte merci !!!</h4>
+
+
+<a href="/"> <button type="button" class="btn btn-primary">Boutique</button></a>
 </div>
 
 @endsection
