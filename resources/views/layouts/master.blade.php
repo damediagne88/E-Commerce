@@ -5,12 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
+     @yield('extra_meta')
     <link rel="icon" href="/docs/4.0/assets/img/favicons/favicon.ico">
 
     <title>E-commerce</title>
     @laravelPWA
 
     @yield('extra_script')
+   
 
     <link rel="canonical" href="https://getbootstrap.com/docs/4.0/examples/blog/">
 

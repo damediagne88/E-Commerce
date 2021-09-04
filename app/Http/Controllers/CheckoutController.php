@@ -17,6 +17,15 @@ class CheckoutController extends Controller
      */
     public function index()
     {
+        /**
+         * Cette fonction nous permets d'empecher au utilisateur d'aller sur la page paiement 
+         * si leur panier est vide 
+         * */ 
+        if(Cart::count() <=0){
+         return redirect()->route('products.index');
+        }
+        
+
        // la clé secrete de api stripe
         Stripe::setApiKey('sk_test_VePHdqKTYQjKNInc7u56JBrQ');
        
@@ -51,7 +60,11 @@ class CheckoutController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        
+        Cart::destroy();
+        $data = $request->json()->all();
+        return $data['paymentIntent'];
+       
     }
 
     /**
