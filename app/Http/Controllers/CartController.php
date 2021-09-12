@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 use Gloudemans\Shoppingcart\Facades\Cart;
+use Illuminate\Support\Facades\Validator;
 
 class CartController extends Controller
 {
@@ -15,7 +17,6 @@ class CartController extends Controller
      */
     public function index()
     {
-
         return view('carts.index');
     }
 
@@ -53,7 +54,6 @@ class CartController extends Controller
 
         return redirect()->route('products.index')->with('success','Le produit à bien été ajouter a votre panier');
         
-         
 
     }
 
@@ -86,9 +86,29 @@ class CartController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $rowId)
     {
-        //
+        $data = $request->json()->all();
+        
+        $validator = Validator::make($request->all(),[
+            'qty' =>'required|numeric|between:1,6'
+        ]);
+
+       
+
+        if($validator->fails()){
+
+            Session::flash('danger','La quantité de ce  produit n\'est  pas disponible.');
+            return response()->json(['error' =>'Product Quantity Not Available']);
+            
+        }
+
+        
+        Cart::update($rowId ,$data['qty']);
+
+        Session::flash('success','La quantité du produit est passée a ' . $data['qty'] .  '.');
+
+        return response()->json(['success' =>'Cart Quantity Has Been Updated']);
     }
 
     /**

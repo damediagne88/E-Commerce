@@ -25,12 +25,10 @@ Route::resource('products', ProductController::class);
 
 Route::resource('carts',CartController::class);
 
-
-Route::get('/videpanier',function(){
-
-    return Cart::destroy();
-});
-
+Route::get('/carts','CartController@index')->name('carts.index');
+Route::post('/carts/store','CartController@store')->name('carts.store');
+Route::put('/carts/{rowId}','CartController@update')->name('carts.update');
+Route::delete('/carts/{rowId}','CartController@destroy')->name('carts.destroy');
 /*
 |--------------------------------------------------------------------------
 | Roote checkout 

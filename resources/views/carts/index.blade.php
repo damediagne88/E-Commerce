@@ -41,8 +41,17 @@
                       </div>
                     </div>
                   </th>
-                  <td class="border-0 align-middle"><strong>{{ $product->model->getPrice()}}</strong></td>
-                  <td class="border-0 align-middle"><strong>1</strong></td>
+                  <td class="border-0 align-middle"><strong>{{ getPrice($product->subtotal()) }}</strong></td>
+                  <td class="border-0 align-middle">
+                  <select name="qty" id="qty" data-id="{{ $product->rowId }}" class="custom-select">
+                            @for($i=1; $i <= 6 ; $i++)
+
+                            <option value ="{{ $i }}" {{ $i == $product->qty ? 'selected' : '' }} >{{ $i }}</option>
+
+                            @endfor
+                            
+                    </select>
+                  </td>
                   <td class="border-0 align-middle">
 
                   <form action="{{ route('carts.destroy',$product-> rowId) }}" method="post">
@@ -109,3 +118,42 @@
 @endif
 @endsection
 
+
+@section('script')
+<script>
+
+    var selects = document.querySelectorAll('#qty');
+    Array.from(selects).forEach((element) => {
+        element.addEventListener('change', function(){
+
+            var rowId = this.getAttribute('data-id');
+            var token = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+
+            fetch(
+                `/carts/${rowId}`,
+                {
+                    headers:{
+                        "Content-Type": "application/json",
+                        "Accept": "application/json, text-plain, */*",
+                        "X-Requested-With": "XMLHttpRequest",
+                        "X-CSRF-TOKEN": token
+                    },
+                    method:'patch',
+                    body:JSON.stringify({
+                        qty: this.value
+                    })
+                }
+
+          ).then((data) =>{
+            console.log(data)
+            location.reload();
+          }).catch((error) =>{
+            console.log(error)
+          })
+
+        });
+    });
+
+</script>
+
+@endsection

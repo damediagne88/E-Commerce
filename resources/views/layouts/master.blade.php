@@ -11,7 +11,7 @@
     <title>E-commerce</title>
     @laravelPWA
 
-    @yield('extra_script')
+    
    
 
     <link rel="canonical" href="https://getbootstrap.com/docs/4.0/examples/blog/">
@@ -210,6 +210,12 @@ h1, h2, h3, h4, h5, h6 {
       {{ session('success')}}
       </div>
       @endif
+
+      @if(session('danger'))
+      <div class="alert alert-danger" role="alert">
+      {{ session('danger')}}
+      </div>
+      @endif
   <!--   <div class="jumbotron p-3 p-md-5 text-white rounded bg-dark">
         <div class="col-md-6 px-0">
           <h1 class="display-4 font-italic">Title of a longer featured blog post</h1>
@@ -248,7 +254,9 @@ h1, h2, h3, h4, h5, h6 {
         text: 'Thumbnail'
       });
     </script>
+    
 
+    @yield('script')
     @yield('extra_footer')
   </body>
 </html>

@@ -4,7 +4,7 @@
 <meta name="csrf-token" content="{{ csrf_token() }}">
 @endsection
 
-@section('extra_script')
+@section('script')
 <script src="https://js.stripe.com/v3/"></script>
 @endsection
 
