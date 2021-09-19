@@ -6,7 +6,13 @@
         <div class="col-md-6">
           <div class="card flex-md-row mb-4 box-shadow h-md-250">
             <div class="card-body d-flex flex-column align-items-start">
-              <strong class="d-inline-block mb-2 text-primary">World</strong>
+              <strong class="d-inline-block mb-2 text-primary">
+                @foreach($product->categories as $category)
+               
+                {{ $category->name}}
+                
+                @endforeach
+              </strong>
               <h6 class="mb-0">
                 <a class="text-dark" href="#">{{$product->title}}</a>
               </h6>
@@ -19,6 +25,6 @@
           </div>
         </div>
 @endforeach
-
+{{ $products->appends(request()->input())->links()}}
 @endsection
 
