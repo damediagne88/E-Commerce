@@ -14,7 +14,8 @@
         "laravel/framework": "^6.20.26",
         "laravel/tinker": "^2.5",
         "silviolleite/laravelpwa": "^2.0",
-        "stripe/stripe-php": "^7.95"
+        "stripe/stripe-php": "^7.95",
+        "tcg/voyager": "^1.5"
     },
     "require-dev": {
         "facade/ignition": "^1.16.15",

@@ -16,6 +16,7 @@ Route::resource('/', ProductController::class);
 |--------------------------------------------------------------------------
 */
 Route::resource('products', ProductController::class);
+Route::get('/search','ProductController@search')->name('products.search');
 
 /*
 |--------------------------------------------------------------------------
@@ -38,3 +39,8 @@ Route::delete('/carts/{rowId}','CartController@destroy')->name('carts.destroy');
 Route::get('/paiement','CheckoutController@index')->name('checkout.index');
 Route::post('/paiement','CheckoutController@store')->name('checkout.store');
 Route::get('/merci','CheckoutController@thank')->name('checkout.thank');
+
+
+Route::group(['prefix' => 'admin'], function () {
+    Voyager::routes();
+});

@@ -12,7 +12,7 @@ class ProductController extends Controller
         // $products = Product::inRandomOrder()->take(6)->get();
 
         if(request()->categorie ){
-            $products =Product::with('categories')->wherehas('categories' , function($query){
+            $products = Product::with('categories')->wherehas('categories' , function($query){
                 $query->where('slug' ,request()->categorie );
             })->paginate(6);
         }else{
@@ -27,5 +27,14 @@ class ProductController extends Controller
 
         $product = Product::where('slug',$slug)->firstOrFail();
         return view('products.show',compact('product'));
+    }
+
+    public function search(){
+     $q =request()->input('q');
+     $products = Product::where('title','like',"%$q%")
+                ->orWhere('description','like',"%$q%")
+                ->paginate(6);
+    return view('products.search',compact('products'));
+
     }
 }
